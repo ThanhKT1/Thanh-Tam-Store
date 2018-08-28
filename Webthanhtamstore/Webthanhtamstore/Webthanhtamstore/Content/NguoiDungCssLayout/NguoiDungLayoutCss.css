@@ -1,0 +1,62 @@
+﻿
+
+#ToanTrang{
+    position:relative;
+}
+
+#DangkyDangnhap{
+    float:right;
+    margin-top:-1%;
+}
+
+.activity{
+    float:left;
+ width:400px;
+}
+
+#slider{
+    float:right;
+    width:700px;
+    height:360px;
+}
+.thanhmenu {
+    padding: 10px;
+  
+}
+.thanhmenu li{
+    list-style-type:none;
+    display:inline;
+
+}
+    .thanhmenu li a {
+        font-size: 25px;
+        float: left;
+        margin-left: 45px;
+    }
+    .thanhmenu li a:hover {
+      background-color:indigo;
+      transition-duration:0.5s;
+      padding:20px;
+      text-decoration:none;
+    }
+#txtfind {
+    position:absolute;
+    top: 8px;
+    right:10px;
+}
+#btnfind {
+    float: right;
+    position: absolute;
+    top: 5px;
+    right: 65px;
+}
+
+
+
+    #btnfind button {
+        padding: 19px;
+        position: absolute;
+        top: 5px;
+        right: -60px;
+    }
+

@@ -1,0 +1,34 @@
+﻿@using Webthanhtamstore.Models;
+@model List<MENU>
+
+<link href="~/Content/NguoiDungCssLayout/TrangChuCss.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "SachTheoCD";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+@if (Model.Count == 0)
+{
+    <h1>Không có sản phẩm cần tìm </h1>
+}
+
+@{ int i = 0;}
+@foreach (var item in Model)
+{
+    i++;
+    <div id="ThongTin">
+        <div><img src="@Url.Content("~/HinhAnhSP/" + item.Anh) " width="440" height="300" /></div>
+        <div style="text-align:center">@item.TenSP</div>
+        <div style="text-align:center">@item.Gia</div>
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSP = item.MaSP, @strUrl = Request.Url.ToString() }))
+    {
+        <input type="submit" value="Đặt mua" style="background-color:red" />
+}
+    </div>
+    if (i % 3 == 0)
+    {
+        <div style="clear:both"></div>
+    }
+    <BR />
+}
+

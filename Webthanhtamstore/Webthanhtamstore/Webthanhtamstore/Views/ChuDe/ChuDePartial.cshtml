@@ -1,0 +1,14 @@
+﻿@using Webthanhtamstore.Models;
+@model List<CHUDE>
+
+@foreach(var item in Model){
+    
+
+<a href="@Url.Action("SachTheoCD", new { @MaChuDe=item.MaChuDe})" class="button" style="background-color:#00FF00;">
+    <i class="fas fa-cart-arrow-down"></i>
+
+    @item.TenChuDe
+</a>
+}
+
+

@@ -1,0 +1,86 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+
+@model PagedList.PagedList<Webthanhtamstore.Models.MENU>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2><span style="font-size:25px;"><u>Thanh Tâm Store (Quản Lý Sản Phẩm Quán)</u></span></h2>
+
+<p>
+    @Html.ActionLink("Thêm mới sách", "ThemMoi")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.First().MaSP)*@
+            Mã sản phẩm
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.First().TenSP)*@
+            Tên sản phẩm
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.First().Gia)*@
+            Giá
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.First().MoTa)*@
+            Mô tả
+        </th>
+        <th>
+            @*  @Html.DisplayNameFor(model => model.First().Anh)*@
+            Ảnh sản phẩm
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.First().MaChuDe)*@
+            Mã sản phẩm
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+            <td>
+                @Html.Raw(item.MoTa)@*Cái Raw này quan trọng, quyết định có định dạng dc font chữ hay không*@
+            </td>
+            <td>
+                <div><img src="@Url.Content("~/HinhAnhSP/" + item.Anh) " width="400" height="300" /></div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaChuDe)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { @MaSP=item.MaSP }) |
+                @Html.ActionLink("Chi tiết", "HienThi", new { @MaSP = item.MaSP }) |
+                @Html.ActionLink("Xóa", "Xoa", new { @MaSP = item.MaSP })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*Tạo link liên kết cacc1 trang*@
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>

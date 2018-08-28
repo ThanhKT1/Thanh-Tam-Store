@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="THANHTAMSTOREModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CHUDE">
+    <Key>
+      <PropertyRef Name="MaChuDe" />
+    </Key>
+    <Property Name="MaChuDe" Type="Int32" Nullable="false" />
+    <Property Name="TenChuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MENUs" Relationship="Self.FK_MENU_CHUDE" FromRole="CHUDE" ToRole="MENU" />
+  </EntityType>
+  <EntityType Name="MENU">
+    <Key>
+      <PropertyRef Name="MaSP" />
+    </Key>
+    <Property Name="MaSP" Type="Int32" Nullable="false" />
+    <Property Name="TenSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Anh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MaChuDe" Type="Int32" />
+    <NavigationProperty Name="CHUDE" Relationship="Self.FK_MENU_CHUDE" FromRole="MENU" ToRole="CHUDE" />
+    <NavigationProperty Name="CHITIETDONHANGGGGs" Relationship="THANHTAMSTOREModel.FK_CHITIETDONHANGGGG_MENU" FromRole="MENU" ToRole="CHITIETDONHANGGGG" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_MENU_CHUDE">
+    <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+    <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CHUDE">
+        <PropertyRef Name="MaChuDe" />
+      </Principal>
+      <Dependent Role="MENU">
+        <PropertyRef Name="MaChuDe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="THANHTAMSTOREEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CHUDEs" EntityType="Self.CHUDE" />
+    <EntitySet Name="MENUs" EntityType="Self.MENU" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_MENU_CHUDE" Association="Self.FK_MENU_CHUDE">
+      <End Role="CHUDE" EntitySet="CHUDEs" />
+      <End Role="MENU" EntitySet="MENUs" />
+    </AssociationSet>
+    <EntitySet Name="DONHANGGGs" EntityType="THANHTAMSTOREModel.DONHANGGG" />
+    <EntitySet Name="KHACHHANGGGs" EntityType="THANHTAMSTOREModel.KHACHHANGGG" />
+    <AssociationSet Name="FK_DONHANGGG_KHACHHANGGG" Association="THANHTAMSTOREModel.FK_DONHANGGG_KHACHHANGGG">
+      <End Role="KHACHHANGGG" EntitySet="KHACHHANGGGs" />
+      <End Role="DONHANGGG" EntitySet="DONHANGGGs" />
+    </AssociationSet>
+    <EntitySet Name="CHITIETDONHANGGGGs" EntityType="THANHTAMSTOREModel.CHITIETDONHANGGGG" />
+    <AssociationSet Name="FK_CHITIETDONHANGGGG_DONHANGGG" Association="THANHTAMSTOREModel.FK_CHITIETDONHANGGGG_DONHANGGG">
+      <End Role="DONHANGGG" EntitySet="DONHANGGGs" />
+      <End Role="CHITIETDONHANGGGG" EntitySet="CHITIETDONHANGGGGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHITIETDONHANGGGG_MENU" Association="THANHTAMSTOREModel.FK_CHITIETDONHANGGGG_MENU">
+      <End Role="MENU" EntitySet="MENUs" />
+      <End Role="CHITIETDONHANGGGG" EntitySet="CHITIETDONHANGGGGs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DONHANGGG">
+    <Key>
+      <PropertyRef Name="MaDonHang" />
+    </Key>
+    <Property Name="MaDonHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DaThanhToan" Type="Int32" />
+    <Property Name="TinhTrangGiaoHang" Type="Int32" />
+    <Property Name="NgayDat" Type="DateTime" Precision="3" />
+    <Property Name="NgayGiao" Type="DateTime" Precision="3" />
+    <Property Name="MaKH" Type="Int32" />
+    <NavigationProperty Name="KHACHHANGGG" Relationship="THANHTAMSTOREModel.FK_DONHANGGG_KHACHHANGGG" FromRole="DONHANGGG" ToRole="KHACHHANGGG" />
+    <NavigationProperty Name="CHITIETDONHANGGGGs" Relationship="THANHTAMSTOREModel.FK_CHITIETDONHANGGGG_DONHANGGG" FromRole="DONHANGGG" ToRole="CHITIETDONHANGGGG" />
+  </EntityType>
+  <EntityType Name="KHACHHANGGG">
+    <Key>
+      <PropertyRef Name="MaKH" />
+    </Key>
+    <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaiKhoan" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DONHANGGGs" Relationship="THANHTAMSTOREModel.FK_DONHANGGG_KHACHHANGGG" FromRole="KHACHHANGGG" ToRole="DONHANGGG" />
+  </EntityType>
+  <Association Name="FK_DONHANGGG_KHACHHANGGG">
+    <End Type="THANHTAMSTOREModel.KHACHHANGGG" Role="KHACHHANGGG" Multiplicity="0..1" />
+    <End Type="THANHTAMSTOREModel.DONHANGGG" Role="DONHANGGG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANGGG">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="DONHANGGG">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CHITIETDONHANGGGG">
+    <Key>
+      <PropertyRef Name="MaDonHang" />
+      <PropertyRef Name="MaSP" />
+    </Key>
+    <Property Name="MaDonHang" Type="Int32" Nullable="false" />
+    <Property Name="MaSP" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="DonGia" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="DONHANGGG" Relationship="THANHTAMSTOREModel.FK_CHITIETDONHANGGGG_DONHANGGG" FromRole="CHITIETDONHANGGGG" ToRole="DONHANGGG" />
+    <NavigationProperty Name="MENU" Relationship="THANHTAMSTOREModel.FK_CHITIETDONHANGGGG_MENU" FromRole="CHITIETDONHANGGGG" ToRole="MENU" />
+  </EntityType>
+  <Association Name="FK_CHITIETDONHANGGGG_DONHANGGG">
+    <End Type="THANHTAMSTOREModel.DONHANGGG" Role="DONHANGGG" Multiplicity="1" />
+    <End Type="THANHTAMSTOREModel.CHITIETDONHANGGGG" Role="CHITIETDONHANGGGG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DONHANGGG">
+        <PropertyRef Name="MaDonHang" />
+      </Principal>
+      <Dependent Role="CHITIETDONHANGGGG">
+        <PropertyRef Name="MaDonHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHITIETDONHANGGGG_MENU">
+    <End Type="THANHTAMSTOREModel.MENU" Role="MENU" Multiplicity="1" />
+    <End Type="THANHTAMSTOREModel.CHITIETDONHANGGGG" Role="CHITIETDONHANGGGG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENU">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="CHITIETDONHANGGGG">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+    <style>
+        body #LOGO {
+            font-family: 'Tangerine', serif;
+            font-size: 150px;
+            margin-bottom:-50px;
+        }
+
+        #quayve {
+            background-color:darkgoldenrod;
+            float:right;
+            width:160px;
+            height:20px;
+        }
+
+
+    </style>
+
+    <link href="~/Content/NguoiDungCssLayout/fonts.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/screen.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/NguoiDungLayoutCss.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.1.0-web/css/all.css" rel="stylesheet" />
+
+    <link href="~/Nivo/nivo-slider.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Nivo/jquery.nivo.slider.js"></script>
+    <script src="~/Nivo/jquery.nivo.slider.pack.js"></script>
+
+
+</head>
+<body>
+
+    <div id="ToanTrang">
+        <div id="LOGO" style="text-align:center; padding:80px;color:black;text-shadow:5px 3px 4px;">
+            Thanh Tâm <p style="font-size:80px;"><br />Store</p><br /><p style="font-size:50px;word-spacing:25px;text-shadow:none;color:deepskyblue">Rất hân hạnh được phục vụ quý khách !</p>
+
+            <i class="fab fa-connectdevelop" style="float:right;margin-top:-320px;"></i>
+            <img src="~/HinhAnhLogo/Untitled.png" style="width:260px;height:200px;float:left;margin-top:-340px;margin-left:-10px;box-shadow:6px 6px 6px;border:1px solid black" />
+            <img src="~/HinhAnh/c5cc5be0807400fe1769d327d5d91ccc.jpg" style="width:35px;height:32px;float:left;margin-top:-350px;margin-left:98px" />
+
+        </div>
+        <section class="blank">
+
+            <div class="flash">
+                <div id="DangkyDangnhap">
+                    @Html.Action("GioHangPartial", "GioHang")
+                    <i class="fas fa-sign-in-alt"></i>
+                    @*CÁCH DÙNG CŨ @Html.ActionLink("Đăng nhập", "DangNhap", null, htmlAttributes: new { @class = "DangNhap" })*@
+                    <a href="@Url.Action("DangNhap","NguoiDung")">Đăng Nhập</a>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <a href="@Url.Action("DangKy","NguoiDung")">Đăng Ký</a>
+                    @*CÁCH DÙNG CŨ @Html.ActionLink("Đăng ký", "DangKy", null, htmlAttributes: new { @class = "DangKy" })*@
+                </div>
+            </div>
+
+            <div class="flash success">
+
+                <ul class="thanhmenu">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">Trang Chủ</a>
+                    </li>
+                    <li>
+                        <a href="#ChuDe">Danh Mục</a>
+                    </li>
+                    <li>
+                        <a href="#">Hình Ảnh</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","LienHe")" target="_blank">Liên Hệ</a>
+                    </li>
+                </ul>
+
+                <div id="btnfind">
+                    @using (Html.BeginForm("KetQuaTimKiem", "TimKiem", FormMethod.Post))//(FormMethod.Post) để nó hiểu là dội về [HttpPost]
+                    {
+                        @Html.TextBox("txtfind", "", htmlAttributes: new { @class = "txtfind", @placeholder = "Nhập tên sản phẩm cần tìm" })
+                    }
+
+                    <button type="submit">
+                        Find
+                    </button>
+
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="activity">
+                <a href="#" class="item-footer green">
+                    Sản phẩm nổi bật
+                </a>
+
+                <div class="activity-list-update">
+
+                    <img src="~/HinhAnhSPM/ao-vest-nam-hang-hieu-xuat-khau-burton-mau-xanh-than-1469675015-373562-1469675015.jpg" width="150" height="150" />
+                    <p><strong>Áo vest nhập khẩu</strong>  <a href="#" style="color:khaki"><u>Xem thêm</u></a></p>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="activity-list-update">
+
+                    <img src="~/HinhAnhSPM/foody-choco-matcha-bao-khanh-989-635784014332531504.jpg" width="150" height="150" />
+                    <p><strong>Trà sữa Matcha Nhật</strong> <a href="#" style="color:khaki"><u>Xem thêm</u></a></p>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="activity-list-update">
+
+                    <img src="~/HinhAnhSPM/Mì-xào-bò-shipdoandemFF.jpg" width="150" height="150" />
+                    <p><strong>Mì xào bò thơm ngon</strong> <a href="#" style="color:khaki"><u>Xem thêm</u></a></p>
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+            @RenderSection("NoiDungBenPhai", false)
+            <div id="slider" class="nivoSlider" style="height:500px;width:840px;margin-top:45px">
+
+                <img src="~/Nivo/HinhAnhNivo/19de00489c8406e.jpg" style="height:500px;margin-top:50px" />
+                <img src="~/Nivo/HinhAnhNivo/92ae1fd66daa3ff0d16bf6e2ceaf44b0-ga-ran-5.jpg" style="height:500px;margin-top:50px" />
+                <img src="~/Nivo/HinhAnhNivo/dua-hau-ep.jpg" style="height:500px;margin-top:50px" />
+            </div>
+            <div style="clear:both"></div>
+        </section>
+
+        <section>
+            <div id="ChuDe" style="text-align:center;background-color:#D2691E;">
+
+                @Html.Action("ChuDePartial", "ChuDe")
+            </div>
+
+            <hr>
+
+            <br />
+
+        </section>
+
+
+        @RenderBody()
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+        <section class="blank items">
+            <div class="item" style="float:left;margin-left:10px;">
+                <img src="http://lorempixel.com/400/300/" alt="Image">
+
+                <div class="item-info">
+                    <h1>Item title</h1>
+                    <p>What the hell is this? Get out of town, I didn't know you did anything creative. Ah, let me read some.</p>
+                    <span class="price">£49.99</span>
+                    <a href="#" class="button button-buy">Get it now</a>
+                </div>
+            </div>
+
+            <button type="submit"> <a href="#DangkyDangnhap" id="quayve">Quay lại đầu trang</a></button>
+
+        </section>
+
+        <div>
+            <a href="#" class="button button-buy">
+                <i class="fab fa-facebook"></i>
+
+                Facebook<br /><i class="fab fa-instagram"></i>
+
+                Instagram<br /><i class="fab fa-twitter-square"></i>
+
+                Twitter<br /><i class="fab fa-skype"></i>
+
+                Skype
+            </a>
+        </div>
+
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#slider').nivoSlider();
+            });
+        </script>
+    </div>
+</body>
+        </html>

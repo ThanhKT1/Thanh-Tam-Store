@@ -1,0 +1,42 @@
+﻿@using Webthanhtamstore.Models;
+@model MENU
+
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<style>
+    #slider{
+        display:none;
+    }
+    #nivoSlider{
+        display:none;
+    }
+    #XemChiTietSach{
+        margin-left:450px;
+        padding:20px;
+    }
+    #ThongTinsp{
+        padding-left:220px;
+    }
+
+</style>
+
+@section NoiDungBenPhai{
+    <div id="XemChiTietSach">
+    <div id="HinhAnh"><img src="@Url.Content("~/HinhAnhSP/"+Model.Anh)" width="550" height="400"/> </div>
+    <div id="ThongTinsp">
+        <div id="TenSach">Tên món: @Model.TenSP</div>
+        <div id="MaCD">Mã sản phẩm: @ViewBag.TenChuDe</div>
+        <div id="MoTa">Mô tổ: @Model.MoTa</div>
+        <div id="TenSach">Giá: @Model.Gia</div>
+        <br />
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSP = Model.MaSP, @strUrl = Request.Url.ToString() }))
+    {
+        <input type="submit" value="Đặt mua" style="background-color:red" />
+}
+    </div>
+
+    </div>
+
+}

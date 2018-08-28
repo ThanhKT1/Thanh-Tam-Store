@@ -1,0 +1,47 @@
+﻿
+<style>
+    .activity {
+        display: none;
+    }
+
+    #slider {
+        display: none;
+    }
+
+    #ChuDe {
+        display: none;
+    }
+
+    .item {
+        display: none;
+    }
+
+</style>
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<div id="SignIn" style="text-align:center; z-index:2; margin-top:10px;">
+    <img src="~/HinhAnhSignIn/hinh-anh-cafe-dep-ly-cafe-ca-phe-sua-da-ca-phe-den-6.jpeg" style=" width:700px;
+        height:400px; border-radius:7px;" />
+    <div id="BoxSI" style="margin-top:-350px;">
+        <h2><span style="font-size:60px;color:orangered;font-family:'Berlin Sans FB'"><b>Đăng Nhập</b></span></h2>
+
+        <p style="color:deeppink;font-size:25px;">
+            @ViewBag.ThongBao </ p >
+            <br />
+            @using (Html.BeginForm())
+            {
+            <span style="color:green;font-size:25px;"><b>Tài khoản</b></span><br />
+                @Html.TextBox("txtTaiKhoan");
+                <br />
+                <span style="color:green;font-size:25px"><b>Mật khẩu</b></span><br />
+                @Html.TextBox("txtMatKhau");
+                <br /> <br />
+                <input type="submit" value="Xác nhận" />
+            }
+            <hr />
+    </div>
+</div>
+

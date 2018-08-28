@@ -1,0 +1,45 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Webthanhtamstore.Models.MENU>
+<link href="~/Content/NguoiDungCssLayout/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "KetQuaTimKiem";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<h2>Kết quả tìm kiếm</h2>
+<div>@ViewBag.ThongBao</div> @*Thông báo có bao nhiêu kết quả tìm kiếm*@
+
+<div>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <div id="ThongTin">
+            <a href="@Url.Action("XemChiTiet","Menu",new { @MaSP=item.MaSP})"> <div><img src="@Url.Content("~/HinhAnhSP/" + item.Anh) " width="400" height="300" /></div></a>
+            <div style="text-align:center">@item.TenSP</div>
+            <div style="text-align:center">@item.Gia</div>
+            @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSP = item.MaSP, @strUrl = Request.Url.ToString() }))
+            {
+                <input type="submit" value="Đặt mua" style="background-color:red" />
+            }
+        </div>
+        if (i % 3 == 0)
+        {
+            <div style="clear:both"></div>
+        }
+        <BR />
+    }
+</div>
+
+@*Tạo link liên kết cacc1 trang*@
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("KetQuaTimKiem", new { page = page,@sTuKhoa=ViewBag.TuKhoa }))@*Đối chiếu với ViewBag bên TimKiemController*@
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>

@@ -1,0 +1,117 @@
+﻿@using Webthanhtamstore.Models;
+@model List<GioHang>
+
+<link href="~/Content/NguoiDungCssLayout/TableGioHang.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Sửa Giỏ Hàng";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<style>
+    .activity {
+        display: none;
+    }
+
+    #slider {
+        display: none;
+    }
+
+    #ChuDe {
+        display: none;
+    }
+
+    .item {
+        display: none;
+    }
+</style>
+
+
+
+<style>
+    .activity {
+        display: none;
+    }
+
+    #slider {
+        display: none;
+    }
+
+    #ChuDe {
+        display: none;
+    }
+
+    .item {
+        display: none;
+    }
+</style>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .th1 {
+        width: 140px;
+    }
+
+    .th2 {
+        width: 381px;
+    }
+
+    .th3 {
+        width: 226px;
+    }
+
+    .th4 {
+        width: 210px;
+    }
+
+    .th5 {
+        width: 75px;
+    }
+</style>
+
+<table>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.iMaSP</td>
+
+            <td>@item.sTenSP</td>
+
+            <td><img src="@Url.Content("~/HinhAnhSP/"+item.iAnh)" width="50" height="50" /></td>
+
+            <td>@item.dGia</td>
+            @*Chỉnh sửa Gio3 hàng gọi về AcTion CapNhapGioHang*@
+            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMaSP }))
+            {
+                <td>@Html.TextBox("txtSoLuong", item.iSoLuong)</td>
+
+                <td>@item.dThanhTien</td>
+                <td>
+                    <input type="submit" value="Cập nhật giỏ hàng" />
+                    <br />
+                    @Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMaSP })
+                </td>
+            }
+        </tr>
+    }
+
+
+</table>
+
